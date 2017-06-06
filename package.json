@@ -1,0 +1,38 @@
+{
+  "name": "feature-compare",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "eslint": "^3.19.0",
+    "eslint-plugin-node": "^4.2.2",
+    "prop-types": "^15.5.8",
+    "react": "^15.5.4",
+    "react-bootstrap": "^0.31.0",
+    "react-dom": "^15.5.4",
+    "react-test-renderer": "^15.5.4"
+  },
+  "devDependencies": {
+    "enzyme": "^2.8.2",
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-config-standard-react": "^5.0.0",
+    "eslint-plugin-node": "^4.2.2",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^7.0.1",
+    "eslint-plugin-standard": "^3.0.1",
+    "jest": "^19.0.2",
+    "jest-enzyme": "^3.0.1",
+    "react-addons-test-utils": "^15.5.1",
+    "react-dom": "^15.5.4",
+    "react-scripts": "1.0.7",
+    "react-test-renderer": "^15.5.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "cov": "react-scripts test --env=jsdom --coverage",
+    "eject": "react-scripts eject",
+    "lint": "./node_modules/.bin/eslint src"
+  }
+}

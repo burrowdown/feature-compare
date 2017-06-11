@@ -1,13 +1,13 @@
 import React from 'react'
 // import ReactDOM from 'react-dom'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 import FeatureTable from '../FeatureTable.js'
 
 /* global it describe expect  */
 
 describe('when loading with a "products" array', () => {
   let testArray = ['Item1', 'Item2', 'Item3']
-  let wrapper = shallow(
+  let wrapper = mount(
     <FeatureTable
       products={testArray}
     />

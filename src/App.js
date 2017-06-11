@@ -7,50 +7,52 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      // products: ['stuff', 'things'],
+      // products: [{'name': 'stuff', 'url': 'example.com', 'price': '$50'}, {'name': 'things', 'url': ''}],
       products: [],
       productInput: false,
       currentInput: ''
     }
-    this.handleProductButton = this.handleProductButton.bind(this)
-    this.handleInputChange = this.handleInputChange.bind(this)
-    this.handleInputSave = this.handleInputSave.bind(this)
+    this.handleNewProductButton = this.handleNewProductButton.bind(this)
+    this.handleNewProductInputChange = this.handleNewProductInputChange.bind(this)
+    this.handleNewProductInputSave = this.handleNewProductInputSave.bind(this)
   }
-  handleProductButton (e) {
+  handleNewProductButton (e) {
     this.setState({
       productInput: true
     })
+    console.log(this.state.products)
   }
 
-  handleInputChange (e) {
+  handleNewProductInputChange (e) {
     this.setState({
       currentInput: e.target.value
     })
   }
 
-  handleInputSave (e) {
+  handleNewProductInputSave (e) {
     // when state.products is an array of objects:
-    // let newProducts = this.state.products.map((x) => Object.assign({}, x))
-    let newProducts = this.state.products.map((x) => x)
-    newProducts.push(this.state.currentInput)
+    let newProducts = this.state.products.map((x) => Object.assign({}, x))
+    // let newProducts = this.state.products.map((x) => x)
+    newProducts.push({'name': this.state.currentInput, 'url': '', 'price': ''})
     this.setState({
       products: newProducts,
-      productInput: false
+      productInput: false,
+      currentInput: ''
     })
   }
 
   render () {
-    let productField = <td><Button id='product-button' onClick={this.handleProductButton}>Add a Product</Button></td>
+    let productField = <td><Button id='product-button' onClick={this.handleNewProductButton}>Add a Product</Button></td>
     if (this.state.productInput) {
       productField = <td><input
         id='new-product-input'
-        onChange={this.handleInputChange}
+        onChange={this.handleNewProductInputChange}
         placeholder='Product name'
         value={this.state.currentInput}
         />
         <Button
           id='save-button'
-          onClick={this.handleInputSave}
+          onClick={this.handleNewProductInputSave}
         >save</Button></td>
     }
 
@@ -62,6 +64,8 @@ class App extends Component {
             <tr id='new-feature-row'>
               <td />
               <td />
+              <td className='weak'>link</td>
+              <td className='weak'>price</td>
               <td>
                 <Button>Add a feature</Button>
               </td>
@@ -74,6 +78,8 @@ class App extends Component {
             <tr id='new-product-row'>
               <td />
               {productField}
+              <td />
+              <td />
               <td />
             </tr>
           </tfoot>

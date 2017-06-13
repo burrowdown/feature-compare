@@ -7,6 +7,7 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      features: [],
       // products: [{'name': 'stuff', 'url': 'example.com', 'price': '$50'}, {'name': 'things', 'url': ''}],
       products: [],
       productInput: false,
@@ -15,12 +16,12 @@ class App extends Component {
     this.handleNewProductButton = this.handleNewProductButton.bind(this)
     this.handleNewProductInputChange = this.handleNewProductInputChange.bind(this)
     this.handleNewProductInputSave = this.handleNewProductInputSave.bind(this)
+    this.handleCancleButton = this.handleCancleButton.bind(this)
   }
   handleNewProductButton (e) {
     this.setState({
       productInput: true
     })
-    console.log(this.state.products)
   }
 
   handleNewProductInputChange (e) {
@@ -30,9 +31,7 @@ class App extends Component {
   }
 
   handleNewProductInputSave (e) {
-    // when state.products is an array of objects:
     let newProducts = this.state.products.map((x) => Object.assign({}, x))
-    // let newProducts = this.state.products.map((x) => x)
     newProducts.push({'name': this.state.currentInput, 'url': '', 'price': ''})
     this.setState({
       products: newProducts,
@@ -41,7 +40,15 @@ class App extends Component {
     })
   }
 
+  handleCancleButton () {
+    this.setState({
+      productInput: false,
+      currentInput: ''
+    })
+  }
+
   render () {
+    // TODO: prefer const over let? even though I reassign?
     let productField = <td><Button id='product-button' onClick={this.handleNewProductButton}>Add a Product</Button></td>
     if (this.state.productInput) {
       productField = <td><input
@@ -53,26 +60,21 @@ class App extends Component {
         <Button
           id='save-button'
           onClick={this.handleNewProductInputSave}
-        >save</Button></td>
+        >save</Button>
+        <Button
+          id='cancel-button'
+          onClick={this.handleCancleButton}
+        >cancel</Button>
+      </td>
     }
 
     return (
       <div className='App'>
         <Jumbotron><h2>FeatureCompare.com</h2></Jumbotron>
         <Table bordered condensed hover>
-          <thead>
-            <tr id='new-feature-row'>
-              <td />
-              <td />
-              <td className='weak'>link</td>
-              <td className='weak'>price</td>
-              <td>
-                <Button>Add a feature</Button>
-              </td>
-            </tr>
-          </thead>
           <FeatureTable
             products={this.state.products}
+            features={this.state.features}
           />
           <tfoot>
             <tr id='new-product-row'>

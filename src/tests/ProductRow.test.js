@@ -1,5 +1,4 @@
 import React from 'react'
-// import ReactDOM from 'react-dom'
 import { shallow } from 'enzyme'
 import ProductRow from '../ProductRow.js'
 
@@ -9,7 +8,7 @@ describe('when loading a row', () => {
   let testObject = {'name': '1', 'price': '3', 'url': '2'}
   let row = shallow(<ProductRow productRow={testObject} />)
   it('renders price and url into correct columns', () => {
-    // TODO: I want this to actually look inside the cells, not just check existence
+    // TODO: actually look inside the cells, not just check existence
     expect(row.find('#product-name').exists()).toBe(true)
     expect(row.find('#product-price').exists()).toBe(true)
     expect(row.find('#product-link').exists()).toBe(true)

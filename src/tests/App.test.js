@@ -1,15 +1,12 @@
 import React from 'react'
-// import ReactDOM from 'react-dom'
 import { shallow } from 'enzyme'
 import App from '../App.js'
-// import renderer from 'react-test-renderer'
 
 /* global it describe expect */
 
 describe('App', () => {
-  it('renders a feature row and a new product row', () => {
-    let app = shallow(<App />)
-    expect(app.find('#new-feature-row').exists()).toBe(true)
+  let app = shallow(<App />)
+  it('renders a new product row', () => {
     expect(app.find('#new-product-row').exists()).toBe(true)
   })
 })

@@ -25,7 +25,7 @@ describe('integration test', () => {
     it('will save currentNewFeatureInput to features', () => {
       app.setState({ currentNewFeatureInput: 'bar' })
       app.find('#feature-save-button').simulate('click')
-      expect(app.state('features')).toContain('bar')
+      expect(app.state('features').pop().name).toContain('bar')
     })
     it('will not save of no input', () => {
       app.setState({ currentNewFeatureInput: '' })

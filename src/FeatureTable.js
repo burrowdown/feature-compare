@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ProductRow from './ProductRow'
-import FeatureRow from './FeatureRow'
 
 export default class FeatureTable extends Component {
   render () {
@@ -13,11 +12,6 @@ export default class FeatureTable extends Component {
 
     return (
       <tbody>
-        <FeatureRow
-          features={this.props.features}
-          onNewFeatureSave={this.props.onNewFeatureSave}
-          onNewFeatureInputChange={this.props.onNewFeatureInputChange}
-        />
         {rows}
       </tbody>
     )
@@ -26,7 +20,5 @@ export default class FeatureTable extends Component {
 
 FeatureTable.propTypes = {
   products: PropTypes.array,
-  features: PropTypes.array,
-  onNewFeatureSave: PropTypes.func,
-  onNewFeatureInputChange: PropTypes.func
+  features: PropTypes.array
 }

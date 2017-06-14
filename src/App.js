@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 import './App.css'
 import { Jumbotron, Table, Button } from 'react-bootstrap'
 import FeatureTable from './FeatureTable'
+import FeatureRow from './FeatureRow'
 
 class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      // features: [{'name': 'waterproof', 'weight': 1, 'score': 0}],
       features: [],
       // products: [{'name': 'stuff', 'url': 'example.com', 'price': '$50'}, {'name': 'things', 'url': ''}],
       products: [],
@@ -21,6 +23,7 @@ class App extends Component {
     this.handleNewFeatureSave = this.handleNewFeatureSave.bind(this)
     this.handleNewFeatureInputChange = this.handleNewFeatureInputChange.bind(this)
   }
+
   handleNewProductButton () {
     this.setState({
       productInput: true
@@ -35,7 +38,9 @@ class App extends Component {
 
   handleNewProductInputSave () {
     let newProducts = this.state.products.map((x) => Object.assign({}, x))
-    newProducts.push({'name': this.state.currentNewProductInput, 'url': '', 'price': ''})
+    if (this.state.currentNewProductInput !== '') {
+      newProducts.push({'name': this.state.currentNewProductInput, 'url': '', 'price': ''})
+    }
     this.setState({
       products: newProducts,
       productInput: false,
@@ -49,15 +54,17 @@ class App extends Component {
       currentNewProductInput: ''
     })
   }
+
   handleNewFeatureInputChange (e) {
     this.setState({
       currentNewFeatureInput: e.target.value
     })
   }
+
   handleNewFeatureSave () {
-    let newFeatures = this.state.features.map((x) => x)
+    let newFeatures = this.state.features.map((x) => Object.assign({}, x))
     if (this.state.currentNewFeatureInput !== '') {
-      newFeatures.push(this.state.currentNewFeatureInput)
+      newFeatures.push({'name': this.state.currentNewFeatureInput, 'weight': 1, 'score': 0})
     }
     this.setState({
       features: newFeatures,
@@ -73,13 +80,15 @@ class App extends Component {
         onChange={this.handleNewProductInputChange}
         placeholder='Product name'
         value={this.state.currentNewProductInput}
-        />
+      />
         <Button
           id='save-button'
+          bsSize='xsmall'
           onClick={this.handleNewProductInputSave}
         >save</Button>
         <Button
           id='cancel-button'
+          bsSize='xsmall'
           onClick={this.handleNewProductCancelButton}
         >cancel</Button>
       </td>
@@ -89,11 +98,14 @@ class App extends Component {
       <div className='App'>
         <Jumbotron><h2>FeatureCompare.com</h2></Jumbotron>
         <Table bordered condensed hover>
-          <FeatureTable
-            products={this.state.products}
+          <FeatureRow
             features={this.state.features}
             onNewFeatureSave={this.handleNewFeatureSave}
             onNewFeatureInputChange={this.handleNewFeatureInputChange}
+          />
+          <FeatureTable
+            products={this.state.products}
+            features={this.state.features}
           />
           <tfoot>
             <tr id='new-product-row'>

@@ -12,25 +12,29 @@ export default class FeatureRow extends Component {
     this.handleNewFeatureCancel = this.handleNewFeatureCancel.bind(this)
     this.newFeatureSave = this.newFeatureSave.bind(this)
   }
+
   handleNewFeatureButton (e) {
     this.setState({
       featureInput: true
     })
   }
+
   newFeatureSave (e) {
     this.props.onNewFeatureSave()
     this.setState({
       featureInput: false
     })
   }
+
   handleNewFeatureCancel (e) {
     this.setState({
       featureInput: false
     })
   }
+
   render () {
     const cols = this.props.features.map((feature) => {
-      return (<td>{feature}</td>)
+      return (<td>{feature.name}</td>)
     })
     let featureField
     if (this.state.featureInput) {
@@ -42,10 +46,12 @@ export default class FeatureRow extends Component {
       />
         <Button
           id='feature-save-button'
+          bsSize='xsmall'
           onClick={this.newFeatureSave}
         >save</Button>
         <Button
           id='feature-cancel-button'
+          bsSize='xsmall'
           onClick={this.handleNewFeatureCancel}
         >cancel</Button>
       </td>
@@ -55,17 +61,26 @@ export default class FeatureRow extends Component {
         onClick={this.handleNewFeatureButton}
       >Add a feature</Button></td>
     }
+    const weights = this.props.features.map((feature) => {
+      return (<td>{feature.weight}</td>)
+    })
 
     return (
-      <tr id='new-feature-row'>
-        <td />
-        <td />
-        <td className='weak'>link</td>
-        <td className='weak'>price</td>
-        {cols}
-        {featureField}
-
-      </tr>
+      <thead>
+        <tr id='new-feature-row'>
+          <td rowSpan={2} colSpan={2} />
+          <td rowSpan={2} className='weak'>link</td>
+          <td rowSpan={2} className='weak'>price</td>
+          {cols}
+          {featureField}
+        </tr>
+        <tr id='weight-row'>
+          {weights}
+          <td><Button
+            id='edit-weight-button'
+            bsSize='xsmall'>edit points</Button></td>
+        </tr>
+      </thead>
     )
   }
 }

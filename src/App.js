@@ -7,37 +7,61 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      features: [],
       // products: [{'name': 'stuff', 'url': 'example.com', 'price': '$50'}, {'name': 'things', 'url': ''}],
       products: [],
       productInput: false,
-      currentInput: ''
+      currentNewProductInput: '',
+      currentNewFeatureInput: ''
     }
     this.handleNewProductButton = this.handleNewProductButton.bind(this)
     this.handleNewProductInputChange = this.handleNewProductInputChange.bind(this)
     this.handleNewProductInputSave = this.handleNewProductInputSave.bind(this)
+    this.handleNewProductCancelButton = this.handleNewProductCancelButton.bind(this)
+    this.handleNewFeatureSave = this.handleNewFeatureSave.bind(this)
+    this.handleNewFeatureInputChange = this.handleNewFeatureInputChange.bind(this)
   }
-  handleNewProductButton (e) {
+  handleNewProductButton () {
     this.setState({
       productInput: true
     })
-    console.log(this.state.products)
   }
 
   handleNewProductInputChange (e) {
     this.setState({
-      currentInput: e.target.value
+      currentNewProductInput: e.target.value
     })
   }
 
-  handleNewProductInputSave (e) {
-    // when state.products is an array of objects:
+  handleNewProductInputSave () {
     let newProducts = this.state.products.map((x) => Object.assign({}, x))
-    // let newProducts = this.state.products.map((x) => x)
-    newProducts.push({'name': this.state.currentInput, 'url': '', 'price': ''})
+    newProducts.push({'name': this.state.currentNewProductInput, 'url': '', 'price': ''})
     this.setState({
       products: newProducts,
       productInput: false,
-      currentInput: ''
+      currentNewProductInput: ''
+    })
+  }
+
+  handleNewProductCancelButton () {
+    this.setState({
+      productInput: false,
+      currentNewProductInput: ''
+    })
+  }
+  handleNewFeatureInputChange (e) {
+    this.setState({
+      currentNewFeatureInput: e.target.value
+    })
+  }
+  handleNewFeatureSave () {
+    let newFeatures = this.state.features.map((x) => x)
+    if (this.state.currentNewFeatureInput !== '') {
+      newFeatures.push(this.state.currentNewFeatureInput)
+    }
+    this.setState({
+      features: newFeatures,
+      currentNewFeatureInput: ''
     })
   }
 
@@ -48,39 +72,34 @@ class App extends Component {
         id='new-product-input'
         onChange={this.handleNewProductInputChange}
         placeholder='Product name'
-        value={this.state.currentInput}
+        value={this.state.currentNewProductInput}
         />
         <Button
           id='save-button'
           onClick={this.handleNewProductInputSave}
-        >save</Button></td>
+        >save</Button>
+        <Button
+          id='cancel-button'
+          onClick={this.handleNewProductCancelButton}
+        >cancel</Button>
+      </td>
     }
 
     return (
       <div className='App'>
         <Jumbotron><h2>FeatureCompare.com</h2></Jumbotron>
         <Table bordered condensed hover>
-          <thead>
-            <tr id='new-feature-row'>
-              <td />
-              <td />
-              <td className='weak'>link</td>
-              <td className='weak'>price</td>
-              <td>
-                <Button>Add a feature</Button>
-              </td>
-            </tr>
-          </thead>
           <FeatureTable
             products={this.state.products}
+            features={this.state.features}
+            onNewFeatureSave={this.handleNewFeatureSave}
+            onNewFeatureInputChange={this.handleNewFeatureInputChange}
           />
           <tfoot>
             <tr id='new-product-row'>
               <td />
               {productField}
-              <td />
-              <td />
-              <td />
+              <td colSpan={this.state.features.length + 3} />
             </tr>
           </tfoot>
 

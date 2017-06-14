@@ -9,6 +9,7 @@ describe('when loading with a "products" array', () => {
   let wrapper = mount(
     <FeatureTable
       products={testArray}
+      features={[]}
     />
   )
   it('renders a row for each item in the array', () => {

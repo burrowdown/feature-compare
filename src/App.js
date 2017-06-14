@@ -11,14 +11,17 @@ class App extends Component {
       // products: [{'name': 'stuff', 'url': 'example.com', 'price': '$50'}, {'name': 'things', 'url': ''}],
       products: [],
       productInput: false,
-      currentInput: ''
+      currentNewProductInput: '',
+      currentNewFeatureInput: ''
     }
     this.handleNewProductButton = this.handleNewProductButton.bind(this)
     this.handleNewProductInputChange = this.handleNewProductInputChange.bind(this)
     this.handleNewProductInputSave = this.handleNewProductInputSave.bind(this)
-    this.handleCancleButton = this.handleCancleButton.bind(this)
+    this.handleNewProductCancelButton = this.handleNewProductCancelButton.bind(this)
+    this.handleNewFeatureSave = this.handleNewFeatureSave.bind(this)
+    this.handleNewFeatureInputChange = this.handleNewFeatureInputChange.bind(this)
   }
-  handleNewProductButton (e) {
+  handleNewProductButton () {
     this.setState({
       productInput: true
     })
@@ -26,36 +29,50 @@ class App extends Component {
 
   handleNewProductInputChange (e) {
     this.setState({
-      currentInput: e.target.value
+      currentNewProductInput: e.target.value
     })
   }
 
-  handleNewProductInputSave (e) {
+  handleNewProductInputSave () {
     let newProducts = this.state.products.map((x) => Object.assign({}, x))
-    newProducts.push({'name': this.state.currentInput, 'url': '', 'price': ''})
+    newProducts.push({'name': this.state.currentNewProductInput, 'url': '', 'price': ''})
     this.setState({
       products: newProducts,
       productInput: false,
-      currentInput: ''
+      currentNewProductInput: ''
     })
   }
 
-  handleCancleButton () {
+  handleNewProductCancelButton () {
     this.setState({
       productInput: false,
-      currentInput: ''
+      currentNewProductInput: ''
+    })
+  }
+  handleNewFeatureInputChange (e) {
+    this.setState({
+      currentNewFeatureInput: e.target.value
+    })
+  }
+  handleNewFeatureSave () {
+    let newFeatures = this.state.features.map((x) => x)
+    if (this.state.currentNewFeatureInput !== '') {
+      newFeatures.push(this.state.currentNewFeatureInput)
+    }
+    this.setState({
+      features: newFeatures,
+      currentNewFeatureInput: ''
     })
   }
 
   render () {
-    // TODO: prefer const over let? even though I reassign?
     let productField = <td><Button id='product-button' onClick={this.handleNewProductButton}>Add a Product</Button></td>
     if (this.state.productInput) {
       productField = <td><input
         id='new-product-input'
         onChange={this.handleNewProductInputChange}
         placeholder='Product name'
-        value={this.state.currentInput}
+        value={this.state.currentNewProductInput}
         />
         <Button
           id='save-button'
@@ -63,7 +80,7 @@ class App extends Component {
         >save</Button>
         <Button
           id='cancel-button'
-          onClick={this.handleCancleButton}
+          onClick={this.handleNewProductCancelButton}
         >cancel</Button>
       </td>
     }
@@ -75,14 +92,14 @@ class App extends Component {
           <FeatureTable
             products={this.state.products}
             features={this.state.features}
+            onNewFeatureSave={this.handleNewFeatureSave}
+            onNewFeatureInputChange={this.handleNewFeatureInputChange}
           />
           <tfoot>
             <tr id='new-product-row'>
               <td />
               {productField}
-              <td />
-              <td />
-              <td />
+              <td colSpan={this.state.features.length + 3} />
             </tr>
           </tfoot>
 

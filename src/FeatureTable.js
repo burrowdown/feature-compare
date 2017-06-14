@@ -5,14 +5,19 @@ import FeatureRow from './FeatureRow'
 
 export default class FeatureTable extends Component {
   render () {
-    // let rows = []
     const rows = this.props.products.map((productRow) => {
-      return (<ProductRow productRow={productRow} features={this.props.features} />)
+      return (<ProductRow
+        productRow={productRow}
+        features={this.props.features} />)
     })
 
     return (
       <tbody>
-        <FeatureRow features={this.props.features} />
+        <FeatureRow
+          features={this.props.features}
+          onNewFeatureSave={this.props.onNewFeatureSave}
+          onNewFeatureInputChange={this.props.onNewFeatureInputChange}
+        />
         {rows}
       </tbody>
     )
@@ -21,5 +26,7 @@ export default class FeatureTable extends Component {
 
 FeatureTable.propTypes = {
   products: PropTypes.array,
-  features: PropTypes.array
+  features: PropTypes.array,
+  onNewFeatureSave: PropTypes.func,
+  onNewFeatureInputChange: PropTypes.func
 }

@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Button } from 'react-bootstrap'
 
-    // let blankCells = this.props.features.length()
-
 export default class ProductRow extends Component {
   constructor (props) {
     super(props)
@@ -45,10 +43,10 @@ export default class ProductRow extends Component {
   }
 
   render () {
-    // let blankCells = [<td />]
-    // this.props.features.forEach((cell) => {
-    //   blankCells.push(cell)
-    // })
+    const blankCells = this.props.features.map((x) => {
+      return (<td />)
+    })
+    blankCells.push(<td />)
     // TODO: refactor some amount of this into its own function
     let link, price, editSave
     if (this.state.isEditable) {
@@ -81,7 +79,7 @@ export default class ProductRow extends Component {
         <td id='product-name'>{this.props.productRow.name}</td>
         <td id='product-link'>{link}</td>
         <td id='product-price'>{price}</td>
-        {/*{blankCells}*/}
+        {blankCells}
       </tr>
     )
   }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button } from 'react-bootstrap'
 import PropTypes from 'prop-types'
+import Weight from './Weight'
 
 export default class FeatureRow extends Component {
   constructor (props) {
@@ -34,7 +35,7 @@ export default class FeatureRow extends Component {
 
   render () {
     const cols = this.props.features.map((feature) => {
-      return (<td>{feature.name}</td>)
+      return (<td key={feature.name}>{feature.name}</td>)
     })
     let featureField
     if (this.state.featureInput) {
@@ -42,7 +43,6 @@ export default class FeatureRow extends Component {
         id='new-feature-input'
         onChange={this.props.onNewFeatureInputChange}
         placeholder='Feature'
-        value={this.state.currentInput}
       />
         <Button
           id='feature-save-button'
@@ -62,7 +62,12 @@ export default class FeatureRow extends Component {
       >Add a feature</Button></td>
     }
     const weights = this.props.features.map((feature) => {
-      return (<td>{feature.weight}</td>)
+      return (<Weight
+        key={feature.name}
+        onWeightSave={this.props.onWeightSave}
+        featureInstance={feature}
+        onWeightInputChange={this.props.onWeightInputChange}
+      />)
     })
 
     return (
@@ -76,9 +81,7 @@ export default class FeatureRow extends Component {
         </tr>
         <tr id='weight-row'>
           {weights}
-          <td><Button
-            id='edit-weight-button'
-            bsSize='xsmall'>edit points</Button></td>
+          <td />
         </tr>
       </thead>
     )
@@ -88,5 +91,7 @@ export default class FeatureRow extends Component {
 FeatureRow.propTypes = {
   features: PropTypes.array,
   onNewFeatureSave: PropTypes.func,
-  onNewFeatureInputChange: PropTypes.func
+  onNewFeatureInputChange: PropTypes.func,
+  onWeightSave: PropTypes.func,
+  onWeightInputChange: PropTypes.func
 }

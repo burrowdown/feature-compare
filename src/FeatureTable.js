@@ -6,6 +6,7 @@ export default class FeatureTable extends Component {
   render () {
     const rows = this.props.products.map((productRow) => {
       return (<ProductRow
+        key={productRow.name}
         productRow={productRow}
         features={this.props.features} />)
     })

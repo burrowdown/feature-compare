@@ -44,9 +44,9 @@ export default class ProductRow extends Component {
 
   render () {
     const blankCells = this.props.features.map((x) => {
-      return (<td />)
+      return (<td key={x.name} />)
     })
-    blankCells.push(<td />)
+    blankCells.push(<td key={'last-one'} />)
     // TODO: refactor some amount of this into its own function
     let link, price, editSave
     if (this.state.isEditable) {

@@ -14,7 +14,6 @@ describe('integration test', () => {
     let app, newFeatureButton
     beforeEach(() => {
       app = mount(<App />)
-      // TODO: instead of simulating this button click, can I set the state of a downstream component?
       newFeatureButton = app.find('#new-feature-button')
       newFeatureButton.simulate('click')
     })
@@ -34,7 +33,6 @@ describe('integration test', () => {
     })
     it('will revert state on cancel button click', () => {
       app.find('#feature-cancel-button').simulate('click')
-      // TODO: inspect downstream state?
       expect(app.find('#feature-cancel-button').exists()).toBe(false)
     })
   })

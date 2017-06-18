@@ -66,7 +66,6 @@ export default class FeatureRow extends Component {
         key={feature.name}
         onWeightSave={this.props.onWeightSave}
         featureInstance={feature}
-        onWeightInputChange={this.props.onWeightInputChange}
       />)
     })
 
@@ -93,5 +92,4 @@ FeatureRow.propTypes = {
   onNewFeatureSave: PropTypes.func,
   onNewFeatureInputChange: PropTypes.func,
   onWeightSave: PropTypes.func,
-  onWeightInputChange: PropTypes.func
 }

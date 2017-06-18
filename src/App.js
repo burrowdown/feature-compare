@@ -22,7 +22,7 @@ class App extends Component {
     this.handleNewProductCancelButton = this.handleNewProductCancelButton.bind(this)
     this.handleNewFeatureSave = this.handleNewFeatureSave.bind(this)
     this.handleNewFeatureInputChange = this.handleNewFeatureInputChange.bind(this)
-    this.handleWeightInputChange = this.handleWeightInputChange.bind(this)
+    this.handleWeightInputSave = this.handleWeightInputSave.bind(this)
   }
 
   // add products
@@ -76,7 +76,7 @@ class App extends Component {
   }
 
   // edit weights
-  handleWeightInputChange (name, weight) {
+  handleWeightInputSave (name, weight) {
     let newFeatures = this.state.features.map((feature) => {
       const newFeature = Object.assign({}, feature)
       if (newFeature.name === name) {
@@ -85,7 +85,6 @@ class App extends Component {
       return newFeature
     })
     this.setState({
-      weightInput: false,
       features: newFeatures
     })
   }
@@ -120,8 +119,8 @@ class App extends Component {
             features={this.state.features}
             onNewFeatureSave={this.handleNewFeatureSave}
             onNewFeatureInputChange={this.handleNewFeatureInputChange}
-            onWeightSave={this.handleWeightSave}
-            onWeightInputChange={this.handleWeightInputChange}
+            // onWeightSave={this.handleWeightSave}
+            onWeightSave={this.handleWeightInputSave}
           />
           <FeatureTable
             products={this.state.products}

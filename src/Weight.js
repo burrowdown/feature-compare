@@ -8,26 +8,47 @@ export default class Weight extends Component {
       weightInput: false
     }
     this.handleWeightEdit = this.handleWeightEdit.bind(this)
+    this.handleWeightClick = this.handleWeightClick.bind(this)
+    this.hanldeWeightBlur = this.hanldeWeightBlur.bind(this)
   }
 
   handleWeightEdit (e) {
-    this.props.onWeightInputChange(this.props.featureInstance.name, e.target.value)
+    const name = this.props.featureInstance.name
+    const weight = e.target.value
+    this.props.onWeightSave(name, weight)
   }
+
+  handleWeightClick () {
+    this.setState({
+      weightInput: true
+    })
+  }
+
+  hanldeWeightBlur () {
+    // TODO: integer validation
+    if (this.props.featureInstance.weight < 1) {
+      this.props.onWeightSave(this.props.featureInstance.name, 1)
+    }
+    this.setState({
+      weightInput: false
+    })
+  }
+
 
   render () {
     let weightBox = this.props.featureInstance.weight
     if (this.state.weightInput) {
       weightBox = <input
         className='weight-input'
-        onChange={this.props.onWeightInputChange}
+        onChange={this.handleWeightEdit}
         value={this.props.featureInstance.weight}
       />
     }
     return (
       <td
         id={this.props.featureInstance.name}
-        onClick={this.handleWeightEdit}
-        onBlur={this.handleWeightSave}
+        onClick={this.handleWeightClick}
+        onBlur={this.hanldeWeightBlur}
       >{weightBox}</td>
     )
   }
@@ -36,5 +57,5 @@ export default class Weight extends Component {
 Weight.propTypes = {
   onWeightSave: PropTypes.func,
   featureInstance: PropTypes.object,
-  onWeightInputChange: PropTypes.func
+  // onWeightInputChange: PropTypes.func
 }

@@ -42,15 +42,14 @@ export default class ProductRow extends Component {
     })
   }
 
-  render () {
-    const blankCells = this.props.features.map((x) => {
-      return (<td />)
-    })
-    blankCells.push(<td />)
-    // TODO: refactor some amount of this into its own function
+  buttons () {
     let link, price, editSave
     if (this.state.isEditable) {
-      editSave = <Button id='save-button' onClick={this.handleProductSave}>save</Button>
+      editSave = <Button
+        id='save-button'
+        bsSize='xsmall'
+        onClick={this.handleProductSave}
+      >save</Button>
       price = <input
         id='price-input'
         placeholder='put price here'
@@ -64,7 +63,10 @@ export default class ProductRow extends Component {
         onChange={this.handleLinkInputChange}
       />
     } else {
-      editSave = <Button id='edit-button' onClick={this.handleProductEdit}>edit</Button>
+      editSave = <Button
+        id='edit-button'
+        bsSize='xsmall'
+        onClick={this.handleProductEdit}>edit</Button>
       price = this.props.productRow.price
       if (this.props.productRow.url === '') {
         link = ''
@@ -72,6 +74,16 @@ export default class ProductRow extends Component {
         link = <a href={this.props.productRow.url}>link</a>
       }
     }
+    return [editSave, price, link]
+  }
+
+  render () {
+    let [editSave, price, link] = this.buttons()
+
+    const blankCells = this.props.features.map((x) => {
+      return (<td key={x.name} />)
+    })
+    blankCells.push(<td key={'last-one'} />)
 
     return (
       <tr className='product-row'>

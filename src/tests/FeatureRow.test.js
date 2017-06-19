@@ -5,27 +5,26 @@ import FeatureRow from '../FeatureRow'
 /* global it describe expect beforeEach jest */
 
 describe('FeatureRow', () => {
-  let row = shallow(<FeatureRow features={[]} />)
   it('loads the right number of cells', () => {
+    let row = shallow(<FeatureRow features={[]} />)
     expect(row.find('td').length).toBe(5)
   })
 })
 
 describe('when adding a feature', () => {
-  let onSave, onChange
-
+  let onSave, row
   beforeEach(() => {
     onSave = jest.fn
-    onChange = jest.fn
+    row = shallow(<FeatureRow
+      features={[]}
+      onNewFeatureSave={onSave}
+    />)
   })
-  let row = shallow(<FeatureRow
-    features={[]}
-    onSave={onSave}
-    onChange={onChange}
-  />)
+
   describe('the "add feature" button', () => {
-    let button = row.find('#new-feature-button')
+    let button
     beforeEach(() => {
+      button = row.find('#new-feature-button')
       button.simulate('click')
     })
     it('renders an input field and save and edit buttons', () => {
@@ -38,36 +37,31 @@ describe('when adding a feature', () => {
       expect(row.state('featureInput')).toBe(true)
     })
   })
-  // TODO: none of these work, something about the handlers not being functions
-  // describe('the save button', () => {
-  //   let button = row.find('#new-feature-button')
-  //   beforeEach(() => {
-  //     button.simulate('click')
-  //   })
-  //   it('sets featureInput to false', () => {
-  //     let save = row.find('#feature-save-button')
-  //     save.simulate('click') // is not a function????
-  //     expect(onNewFeatureSave).toBeCalled()
-  //     expect(row.state('featureInput')).toBe(false)
-  //   })
-  // })
-  // describe('the cancel button', () => {
-  //   beforeEach(() => {
-  //     this.setState({
-  //       featureInput: true
-  //     })
-  //     row.find('#feature-cancel-button').simulate('click')
-  //   })
-  //   it('removes the input field and save and edit buttons', () => {
-  //     expect(row.find('#new-feature-input').exists()).toBe(false)
-  //     expect(row.find('#feature-cancel-button').exists()).toBe(false)
-  //     expect(row.find('#feature-save-button').exists()).toBe(false)
-  //     expect(row.find('#new-feature-button').exists()).toBe(true)
-  //   })
-  //   it('toggles state.featureInput', () => {
-  //     row.find('#feature-cancel-button').simulate('click')
-  //
-  //     expect(row.state('featureInput')).toBe(false)
-  //   })
-  // })
+  describe('the save button', () => {
+    let button
+    beforeEach(() => {
+      button = row.find('#new-feature-button')
+      button.simulate('click')
+    })
+    it('resets featureInput and currentNewFeatureInput', () => {
+      row.find('#feature-save-button').simulate('click')
+      expect(row.state('featureInput')).toBe(false)
+      expect(row.state('currentNewFeatureInput')).toBe('')
+    })
+  })
+  describe('the cancel button', () => {
+    beforeEach(() => {
+      row.setState({featureInput: true})
+      row.find('#feature-cancel-button').simulate('click')
+    })
+    it('removes the input field and save and edit buttons', () => {
+      expect(row.find('#new-feature-input').exists()).toBe(false)
+      expect(row.find('#feature-cancel-button').exists()).toBe(false)
+      expect(row.find('#feature-save-button').exists()).toBe(false)
+      expect(row.find('#new-feature-button').exists()).toBe(true)
+    })
+    it('toggles state.featureInput', () => {
+      expect(row.state('featureInput')).toBe(false)
+    })
+  })
 })

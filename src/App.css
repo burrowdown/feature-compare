@@ -25,3 +25,7 @@ body {
 .weak {
     color: darkgray;
 }
+
+.weight-input {
+    width: 40px;
+}

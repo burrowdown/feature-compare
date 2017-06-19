@@ -46,6 +46,7 @@ export default class FeatureRow extends Component {
     const cols = this.props.features.map((feature) => {
       return (<td key={feature.name}>{feature.name}</td>)
     })
+    // TODO: refactor featureField logic out of the render
     let featureField
     if (this.state.featureInput) {
       featureField = <td><input

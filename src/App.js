@@ -109,8 +109,6 @@ class App extends Component {
           <FeatureRow
             features={this.state.features}
             onNewFeatureSave={this.handleNewFeatureSave}
-            onNewFeatureInputChange={this.handleNewFeatureInputChange}
-            // onWeightSave={this.handleWeightSave}
             onWeightSave={this.handleWeightInputSave}
           />
           <FeatureTable

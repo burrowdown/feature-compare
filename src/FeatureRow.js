@@ -7,11 +7,13 @@ export default class FeatureRow extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      featureInput: false
+      featureInput: false,
+      currentNewFeatureInput: ''
     }
     this.handleNewFeatureButton = this.handleNewFeatureButton.bind(this)
     this.handleNewFeatureCancel = this.handleNewFeatureCancel.bind(this)
     this.newFeatureSave = this.newFeatureSave.bind(this)
+    this.handleNewFeatureInputChange = this.handleNewFeatureInputChange.bind(this)
   }
 
   handleNewFeatureButton (e) {
@@ -20,10 +22,17 @@ export default class FeatureRow extends Component {
     })
   }
 
-  newFeatureSave (e) {
-    this.props.onNewFeatureSave()
+  handleNewFeatureInputChange (e) {
     this.setState({
-      featureInput: false
+      currentNewFeatureInput: e.target.value
+    })
+  }
+
+  newFeatureSave (e) {
+    this.props.onNewFeatureSave(this.state.currentNewFeatureInput)
+    this.setState({
+      featureInput: false,
+      currentNewFeatureInput: ''
     })
   }
 
@@ -41,7 +50,7 @@ export default class FeatureRow extends Component {
     if (this.state.featureInput) {
       featureField = <td><input
         id='new-feature-input'
-        onChange={this.props.onNewFeatureInputChange}
+        onChange={this.handleNewFeatureInputChange}
         placeholder='Feature'
       />
         <Button
@@ -90,6 +99,5 @@ export default class FeatureRow extends Component {
 FeatureRow.propTypes = {
   features: PropTypes.array,
   onNewFeatureSave: PropTypes.func,
-  onNewFeatureInputChange: PropTypes.func,
   onWeightSave: PropTypes.func
 }

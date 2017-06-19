@@ -8,20 +8,18 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      features: [{'name': 'waterproof', 'weight': 1}],
-      // features: [],
-      products: [{'name': 'stuff', 'url': 'example.com', 'price': '$50', 'score': 0}, {'name': 'thing', 'url': ''}],
-      // products: [],
+      // features: [{'name': 'waterproof', 'weight': 1}],
+      features: [],
+      // products: [{'name': 'stuff', 'url': 'example.com', 'price': '$50', 'score': 0}, {'name': 'thing', 'url': ''}],
+      products: [],
       productInput: false,
-      currentNewProductInput: '',
-      currentNewFeatureInput: ''
+      currentNewProductInput: ''
     }
     this.handleNewProductButton = this.handleNewProductButton.bind(this)
     this.handleNewProductInputChange = this.handleNewProductInputChange.bind(this)
     this.handleNewProductInputSave = this.handleNewProductInputSave.bind(this)
     this.handleNewProductCancelButton = this.handleNewProductCancelButton.bind(this)
     this.handleNewFeatureSave = this.handleNewFeatureSave.bind(this)
-    this.handleNewFeatureInputChange = this.handleNewFeatureInputChange.bind(this)
     this.handleWeightInputSave = this.handleWeightInputSave.bind(this)
   }
 
@@ -58,20 +56,13 @@ class App extends Component {
   }
 
   // add features
-  handleNewFeatureInputChange (e) {
-    this.setState({
-      currentNewFeatureInput: e.target.value
-    })
-  }
-
-  handleNewFeatureSave () {
+  handleNewFeatureSave (newFeatureName) {
     let newFeatures = this.state.features.map((x) => Object.assign({}, x))
-    if (this.state.currentNewFeatureInput !== '') {
-      newFeatures.push({'name': this.state.currentNewFeatureInput, 'weight': 1})
+    if (newFeatureName !== '') {
+      newFeatures.push({'name': newFeatureName, 'weight': 1})
     }
     this.setState({
-      features: newFeatures,
-      currentNewFeatureInput: ''
+      features: newFeatures
     })
   }
 

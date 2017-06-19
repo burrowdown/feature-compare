@@ -43,6 +43,5 @@ describe('Weight', () => {
       expect(wrapper.state('weightInput')).toBe(false)
       expect(wrapper.find('input').length).toBe(0)
     })
-
   })
 })

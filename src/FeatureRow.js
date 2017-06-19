@@ -91,5 +91,5 @@ FeatureRow.propTypes = {
   features: PropTypes.array,
   onNewFeatureSave: PropTypes.func,
   onNewFeatureInputChange: PropTypes.func,
-  onWeightSave: PropTypes.func,
+  onWeightSave: PropTypes.func
 }

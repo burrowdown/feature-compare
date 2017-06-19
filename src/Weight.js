@@ -34,7 +34,6 @@ export default class Weight extends Component {
     })
   }
 
-
   render () {
     let weightBox = this.props.featureInstance.weight
     if (this.state.weightInput) {
@@ -56,6 +55,5 @@ export default class Weight extends Component {
 
 Weight.propTypes = {
   onWeightSave: PropTypes.func,
-  featureInstance: PropTypes.object,
-  // onWeightInputChange: PropTypes.func
+  featureInstance: PropTypes.object
 }

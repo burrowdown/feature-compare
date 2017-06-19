@@ -10,7 +10,7 @@ class App extends Component {
     this.state = {
       features: [{'name': 'waterproof', 'weight': 1}],
       // features: [],
-      products: [{'name': 'stuff', 'url': 'example.com', 'price': '$50', 'score': 0}, {'name': 'things', 'url': ''}],
+      products: [{'name': 'stuff', 'url': 'example.com', 'price': '$50', 'score': 0}, {'name': 'thing', 'url': ''}],
       // products: [],
       productInput: false,
       currentNewProductInput: '',
@@ -127,11 +127,11 @@ class App extends Component {
             features={this.state.features}
           />
           <tfoot>
-          <tr id='new-product-row'>
-            <td />
-            {productField}
-            <td colSpan={this.state.features.length + 3} />
-          </tr>
+            <tr id='new-product-row'>
+              <td />
+              {productField}
+              <td colSpan={this.state.features.length + 3} />
+            </tr>
           </tfoot>
 
         </Table>

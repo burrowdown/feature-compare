@@ -14,6 +14,7 @@ describe('FeatureRow', () => {
 describe('when adding a feature', () => {
   let onSave, onChange, row
   beforeEach(() => {
+    // TODO: actually use these or remove them
     onSave = jest.fn
     onChange = jest.fn
     row = shallow(<FeatureRow
@@ -39,19 +40,14 @@ describe('when adding a feature', () => {
       expect(row.state('featureInput')).toBe(true)
     })
   })
-  // TODO: none of these work, something about the handlers not being functions
   describe('the save button', () => {
     let button
     beforeEach(() => {
       button = row.find('#new-feature-button')
       button.simulate('click')
     })
-    it('this is the check one', () => {
-      expect(row.find('#feature-save-button').exists()).toBe(true)
-      expect(row.state('featureInput')).toBe(true)
-    })
     it('sets featureInput to false', () => {
-      row.find('#feature-save-button').simulate('click') // this.props.onNewFeatureSave is not a function????
+      row.find('#feature-save-button').simulate('click')
       // expect(onSave).toBeCalled()
       expect(row.state('featureInput')).toBe(false)
     })

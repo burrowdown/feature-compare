@@ -10,10 +10,13 @@ describe('integration test', () => {
     const div = document.createElement('div')
     ReactDOM.render(<App />, div)
   })
+  let app
+  beforeEach(() => {
+    app = mount(<App />)
+  })
   describe('when adding a feature', () => {
-    let app, newFeatureButton
+    let newFeatureButton
     beforeEach(() => {
-      app = mount(<App />)
       newFeatureButton = app.find('#new-feature-button')
       newFeatureButton.simulate('click')
     })
@@ -34,6 +37,19 @@ describe('integration test', () => {
     it('will revert state on cancel button click', () => {
       app.find('#feature-cancel-button').simulate('click')
       expect(app.find('#feature-cancel-button').exists()).toBe(false)
+    })
+  })
+  describe('when editing a weight', () => {
+    let weightField
+    beforeEach(() => {
+      app.setState({features: [{'name': 'waterproof', 'weight': 42}]})
+      weightField = app.find('#waterproof')
+    })
+    it('something', () => {
+      weightField.simulate('click')
+      let input = weightField.find('.weight-input')
+      input.simulate('change', {target: {value: '321'}})
+      expect(app.state('features')[0].weight).toBe("321")
     })
   })
 })

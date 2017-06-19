@@ -42,35 +42,37 @@ export default class FeatureRow extends Component {
     })
   }
 
-  render () {
-    const cols = this.props.features.map((feature) => {
-      return (<td key={feature.name}>{feature.name}</td>)
-    })
-    // TODO: refactor featureField logic out of the render
-    let featureField
+  featureField () {
     if (this.state.featureInput) {
-      featureField = <td><input
+      return <td><input
         id='new-feature-input'
         onChange={this.handleNewFeatureInputChange}
         placeholder='Feature'
-      />
+     />
         <Button
           id='feature-save-button'
           bsSize='xsmall'
           onClick={this.newFeatureSave}
-        >save</Button>
+       >save</Button>
         <Button
           id='feature-cancel-button'
           bsSize='xsmall'
           onClick={this.handleNewFeatureCancel}
-        >cancel</Button>
+       >cancel</Button>
       </td>
     } else {
-      featureField = <td><Button
+      return <td><Button
         id='new-feature-button'
         onClick={this.handleNewFeatureButton}
-      >Add a feature</Button></td>
+     >Add a feature</Button></td>
     }
+  }
+
+  render () {
+    const cols = this.props.features.map((feature) => {
+      return (<td key={feature.name}>{feature.name}</td>)
+    })
+
     const weights = this.props.features.map((feature) => {
       return (<Weight
         key={feature.name}
@@ -86,7 +88,7 @@ export default class FeatureRow extends Component {
           <td rowSpan={2} className='weak'>link</td>
           <td rowSpan={2} className='weak'>price</td>
           {cols}
-          {featureField}
+          {this.featureField()}
         </tr>
         <tr id='weight-row'>
           {weights}

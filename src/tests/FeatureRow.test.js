@@ -12,15 +12,12 @@ describe('FeatureRow', () => {
 })
 
 describe('when adding a feature', () => {
-  let onSave, onChange, row
+  let onSave, row
   beforeEach(() => {
-    // TODO: actually use these or remove them
     onSave = jest.fn
-    onChange = jest.fn
     row = shallow(<FeatureRow
       features={[]}
       onNewFeatureSave={onSave}
-      onNewFeatureInputChange={onChange}
     />)
   })
 
@@ -46,17 +43,15 @@ describe('when adding a feature', () => {
       button = row.find('#new-feature-button')
       button.simulate('click')
     })
-    it('sets featureInput to false', () => {
+    it('resets featureInput and currentNewFeatureInput', () => {
       row.find('#feature-save-button').simulate('click')
-      // expect(onSave).toBeCalled()
       expect(row.state('featureInput')).toBe(false)
+      expect(row.state('currentNewFeatureInput')).toBe('')
     })
   })
   describe('the cancel button', () => {
     beforeEach(() => {
-      row.setState({
-        featureInput: true
-      })
+      row.setState({featureInput: true})
       row.find('#feature-cancel-button').simulate('click')
     })
     it('removes the input field and save and edit buttons', () => {

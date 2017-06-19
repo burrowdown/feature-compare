@@ -23,18 +23,6 @@ describe('Weight', () => {
       expect(wrapper.state('weightInput')).toBe(true)
       expect(wrapper.find('.weight-input').length).toBe(1)
     })
-    // TODO: TypeError: this.props.onWeightSave is not a function
-    // it('input changes update the featureInstance', () => {
-    //   wrapper.setState({'weightInput': true})
-    //   wrapper.find('.weight-input').simulate('change', {target: {value: '321'}})
-      // expect(wrapper.instance().props.featureInstance.weight).toBe(321)
-    // })
-    // it('saves a 1 if value is not a positive number on blur', () => {
-    //   wrapper.setState({'weightInput': true})
-    //   wrapper.find('.weight-input').simulate('change', {target: {value: ''}})
-    //   wrapper.find('.weight-input').simulate('blur')
-    //   expect(wrapper.instance().props.featureInstance.weight).toBe(1)
-    // })
     it('resets the weightInput state on blur', () => {
       cell.simulate('click')
       expect(wrapper.state('weightInput')).toBe(true)

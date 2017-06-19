@@ -42,12 +42,7 @@ export default class ProductRow extends Component {
     })
   }
 
-  render () {
-    const blankCells = this.props.features.map((x) => {
-      return (<td key={x.name} />)
-    })
-    blankCells.push(<td key={'last-one'} />)
-    // TODO: refactor some amount of this into its own function
+  buttons () {
     let link, price, editSave
     if (this.state.isEditable) {
       editSave = <Button
@@ -79,6 +74,16 @@ export default class ProductRow extends Component {
         link = <a href={this.props.productRow.url}>link</a>
       }
     }
+    return [editSave, price, link]
+  }
+
+  render () {
+    let [editSave, price, link] = this.buttons()
+
+    const blankCells = this.props.features.map((x) => {
+      return (<td key={x.name} />)
+    })
+    blankCells.push(<td key={'last-one'} />)
 
     return (
       <tr className='product-row'>

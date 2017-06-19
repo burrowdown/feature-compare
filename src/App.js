@@ -80,10 +80,10 @@ class App extends Component {
     })
   }
 
-  render () {
-    let productField = <td><Button id='product-button' onClick={this.handleNewProductButton}>Add a Product</Button></td>
+  // render
+  productField () {
     if (this.state.productInput) {
-      productField = <td><input
+      return <td><input
         id='new-product-input'
         onChange={this.handleNewProductInputChange}
         placeholder='Product name'
@@ -100,8 +100,15 @@ class App extends Component {
           onClick={this.handleNewProductCancelButton}
         >cancel</Button>
       </td>
+    } else {
+      return <td><Button
+        id='product-button'
+        onClick={this.handleNewProductButton}
+        >Add a Product</Button></td>
     }
+  }
 
+  render () {
     return (
       <div className='App'>
         <Jumbotron><h2>FeatureCompare.com</h2></Jumbotron>
@@ -118,7 +125,7 @@ class App extends Component {
           <tfoot>
             <tr id='new-product-row'>
               <td />
-              {productField}
+              {this.productField()}
               <td colSpan={this.state.features.length + 3} />
             </tr>
           </tfoot>

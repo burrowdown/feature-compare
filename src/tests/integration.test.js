@@ -36,16 +36,21 @@ describe('integration test', () => {
     })
   })
   describe('when editing a weight', () => {
-    let weightField
+    let weightField, input
     beforeEach(() => {
       app.setState({features: [{'name': 'waterproof', 'weight': 42}]})
       weightField = app.find('#waterproof')
-    })
-    it('something', () => {
       weightField.simulate('click')
-      let input = weightField.find('.weight-input')
-      input.simulate('change', {target: {value: '321'}})
-      expect(app.state('features')[0].weight).toBe('321')
+      input = weightField.find('.weight-input')
+    })
+    it('saves the weight on change', () => {
+      input.simulate('change', {target: {value: 321}})
+      expect(app.state('features')[0].weight).toBe(321)
+    })
+    it('saves a 1 on blur if value is not a positive number', () => {
+      input.simulate('change', {target: {value: 0}})
+      weightField.simulate('blur')
+      expect(app.state('features')[0].weight).toBe(1)
     })
   })
 })

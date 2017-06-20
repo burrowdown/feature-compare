@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Button } from 'react-bootstrap'
+import Cell from './Cell'
 
 export default class ProductRow extends Component {
   constructor (props) {
@@ -81,7 +82,10 @@ export default class ProductRow extends Component {
     let [editSave, price, link] = this.buttons()
 
     const blankCells = this.props.features.map((x) => {
-      return (<td key={x.name} />)
+      return (<Cell
+        key={x.name}
+        productRow={this.props.productRow}
+        />)
     })
     blankCells.push(<td key={'last-one'} />)
 

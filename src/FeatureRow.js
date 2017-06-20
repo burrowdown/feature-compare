@@ -92,7 +92,7 @@ export default class FeatureRow extends Component {
         </tr>
         <tr id='weight-row'>
           {weights}
-          <td />
+          <td className='weak'>points</td>
         </tr>
       </thead>
     )

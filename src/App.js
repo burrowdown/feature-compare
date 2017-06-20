@@ -14,6 +14,7 @@ class App extends Component {
       products: []
     }
     this.handleNewProductSave = this.handleNewProductSave.bind(this)
+    this.handleProductEditSave = this.handleProductEditSave.bind(this)
     this.handleNewFeatureSave = this.handleNewFeatureSave.bind(this)
     this.handleWeightSave = this.handleWeightSave.bind(this)
   }
@@ -23,6 +24,20 @@ class App extends Component {
     if (name !== '') {
       newProducts.push({'name': name, 'url': '', 'price': '', score: 0})
     }
+    this.setState({
+      products: newProducts
+    })
+  }
+
+  handleProductEditSave (name, price, link) {
+    let newProducts = this.state.products.map((product) => {
+      const newProduct = Object.assign({}, product)
+      if (newProduct.name === name) {
+        newProduct.price = price,
+        newProduct.url = link
+      }
+      return newProduct
+    })
     this.setState({
       products: newProducts
     })
@@ -65,6 +80,7 @@ class App extends Component {
             products={this.state.products}
             features={this.state.features}
             onNewProductSave={this.handleNewProductSave}
+            onProductEditSave={this.handleProductEditSave}
           />
         </Table>
       </div>

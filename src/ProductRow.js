@@ -24,8 +24,7 @@ export default class ProductRow extends Component {
   }
 
   handleProductSave (e) {
-    this.props.productRow.price = this.state.currentPriceInput
-    this.props.productRow.url = this.state.currentLinkInput
+    this.props.onProductEditSave(this.props.productRow.name, this.state.currentPriceInput, this.state.currentLinkInput)
     this.setState({
       isEditable: false
     })
@@ -103,5 +102,6 @@ export default class ProductRow extends Component {
 
 ProductRow.propTypes = {
   productRow: PropTypes.object,
-  features: PropTypes.array
+  features: PropTypes.array,
+  onProductEditSave: PropTypes.func
 }

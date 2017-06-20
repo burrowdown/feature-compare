@@ -75,7 +75,9 @@ export default class FeatureTable extends Component {
       return (<ProductRow
         key={productRow.name}
         productRow={productRow}
-        features={this.props.features} />)
+        features={this.props.features}
+        onProductEditSave={this.props.onProductEditSave}
+        />)
     })
 
     return (
@@ -94,5 +96,6 @@ export default class FeatureTable extends Component {
 FeatureTable.propTypes = {
   products: PropTypes.array,
   features: PropTypes.array,
-  onNewProductSave: PropTypes.func
+  onNewProductSave: PropTypes.func,
+  onProductEditSave: PropTypes.func
 }

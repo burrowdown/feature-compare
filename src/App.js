@@ -11,7 +11,7 @@ class App extends Component {
       // features: [{'name': 'waterproof', 'weight': 1}],
       features: [],
       // products: [{'name': 'stuff', 'url': 'example.com', 'price': '$50', 'score': 0}, {'name': 'thing', 'url': ''}]
-      products: [],
+      products: []
     }
     this.handleNewProductSave = this.handleNewProductSave.bind(this)
     this.handleNewFeatureSave = this.handleNewFeatureSave.bind(this)

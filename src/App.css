@@ -29,3 +29,11 @@ body {
 .weight-input {
     width: 40px;
 }
+
+.cell-display-red {
+  background-color: #ffb3b3;
+}
+
+.cell-display-green {
+  background-color: #c5d4c4;
+}

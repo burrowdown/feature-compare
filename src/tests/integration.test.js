@@ -19,6 +19,7 @@ describe('integration test', () => {
     beforeEach(() => {
       newFeatureButton = app.find('#new-feature-button')
       newFeatureButton.simulate('click')
+      app.setState({features: []})
     })
     it('will save input to features', () => {
       app.find('#new-feature-input').simulate('change', {target: {value: 'foo'}})

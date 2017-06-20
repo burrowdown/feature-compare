@@ -14,17 +14,31 @@ describe('integration test', () => {
   beforeEach(() => {
     app = mount(<App />)
   })
-  describe('when adding a feature', () => {
-    let newFeatureButton
+  describe('when adding a product', () => {
     beforeEach(() => {
-      newFeatureButton = app.find('#new-feature-button')
-      newFeatureButton.simulate('click')
+      app.find('#product-button').simulate('click')
+    })
+    it('saves input to products', () => {
+      app.find('#new-product-input').simulate('change', {target: {value: 'foo'}})
+      app.find('#save-button').simulate('click')
+      expect(app.state('products').pop().name).toBe('foo')
+    })
+    it('will not save new products if input is empty', () => {
+      app.find('#new-product-input').simulate('change', {target: {value: ''}})
+      app.find('#save-button').simulate('click')
+      expect(app.state('products').length).toBe(0)
+    })
+  })
+
+  describe('when adding a feature', () => {
+    beforeEach(() => {
+      app.find('#new-feature-button').simulate('click')
       app.setState({features: []})
     })
     it('will save input to features', () => {
       app.find('#new-feature-input').simulate('change', {target: {value: 'foo'}})
       app.find('#feature-save-button').simulate('click')
-      expect(app.state('features').pop().name).toContain('foo')
+      expect(app.state('features').pop().name).toBe('foo')
     })
     it('will not save if no input', () => {
       app.find('#new-feature-input').simulate('change', {target: {value: ''}})

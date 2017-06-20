@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
+
+const CELL_LOOKUP = {
+  'blank': {display: 'cell-display-blank', next: 'green'},
+  'green': {display: 'cell-display-green', next: 'red'},
+  'red': {display: 'cell-display-red', next: 'blank'}
+}
 
 export default class Cell extends Component {
   constructor (props) {
@@ -10,28 +16,13 @@ export default class Cell extends Component {
     this.handleCellClick = this.handleCellClick.bind(this)
   }
 
-  // TODO: Can I combine these two functions? Have an onClick that also returns a class value?
-
   handleCellClick () {
-    let newDisplay
-    if (this.state.display === 'blank') {
-      newDisplay = 'green'
-    } else if (this.state.display === 'green') {
-      newDisplay = 'red'
-    } else {
-      newDisplay = 'blank'
-    }
+    let newDisplay = CELL_LOOKUP[this.state.display].next
     this.setState({display: newDisplay})
   }
 
   cellDisplay () {
-    if (this.state.display === 'blank') {
-      return 'cell-display-blank'
-    } else if (this.state.display === 'green') {
-      return 'cell-display-green'
-    } else {
-      return 'cell-display-red'
-    }
+    return CELL_LOOKUP[this.state.display].display
   }
 
   render () {
@@ -41,6 +32,6 @@ export default class Cell extends Component {
   }
 }
 
-Cell.propTypes = {
-  productRow: PropTypes.object
-}
+// Cell.propTypes = {
+//   productRow: PropTypes.object
+// }

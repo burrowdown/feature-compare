@@ -6,11 +6,14 @@ import ProductRow from '../ProductRow.js'
 
 describe('when loading a row', () => {
   let testObject = {'name': '1', 'price': '2', 'url': '3'}
-  let row = shallow(<ProductRow productRow={testObject} features={[]} />)
+  let row = shallow(<ProductRow productRow={testObject} features={[testObject]} />)
   it('renders price and url into correct columns', () => {
     expect(row.find('#product-name').text()).toBe('1')
     expect(row.find('#product-price').text()).toBe('2')
     expect(row.find('#product-link').text()).toBe('link')
+  })
+  it('renders one blank cell per feature', () => {
+    expect(row.find('Cell').length).toBe(1)
   })
 })
 

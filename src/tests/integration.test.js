@@ -23,6 +23,11 @@ describe('integration test', () => {
       app.find('#save-button').simulate('click')
       expect(app.state('products').pop().name).toBe('foo')
     })
+    it('will not save new products if input is empty', () => {
+      app.find('#new-product-input').simulate('change', {target: {value: ''}})
+      app.find('#save-button').simulate('click')
+      expect(app.state('products').length).toBe(0)
+    })
   })
 
   describe('when adding a feature', () => {

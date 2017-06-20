@@ -8,10 +8,10 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      features: [{'name': 'waterproof', 'weight': 1}],
-      // features: [],
-      products: [{'name': 'stuff', 'url': 'example.com', 'price': '$50', 'score': 0}, {'name': 'thing', 'url': ''}]
-      // products: [],
+      // features: [{'name': 'waterproof', 'weight': 1}],
+      features: [],
+      // products: [{'name': 'stuff', 'url': 'example.com', 'price': '$50', 'score': 0}, {'name': 'thing', 'url': ''}]
+      products: [],
     }
     this.handleNewProductSave = this.handleNewProductSave.bind(this)
     this.handleNewFeatureSave = this.handleNewFeatureSave.bind(this)

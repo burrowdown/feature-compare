@@ -45,9 +45,8 @@ export default class ProductRow extends Component {
   }
 
   handlePointsUpdate (diff) {
-    let output = (this.state.points + diff)
     this.setState({
-      points: output
+      points: (this.state.points + diff)
     })
   }
 

@@ -9,12 +9,14 @@ export default class ProductRow extends Component {
     this.state = {
       isEditable: false,
       currentLinkInput: '',
-      currentPriceInput: ''
+      currentPriceInput: '',
+      points: 0
     }
     this.handleProductSave = this.handleProductSave.bind(this)
     this.handleProductEdit = this.handleProductEdit.bind(this)
     this.handleLinkInputChange = this.handleLinkInputChange.bind(this)
     this.handlePriceInputChange = this.handlePriceInputChange.bind(this)
+    this.handlePointsUpdate = this.handlePointsUpdate.bind(this)
   }
 
   handleProductEdit (e) {
@@ -39,6 +41,13 @@ export default class ProductRow extends Component {
   handlePriceInputChange (e) {
     this.setState({
       currentPriceInput: e.target.value
+    })
+  }
+
+  handlePointsUpdate (diff) {
+    let output = (this.state.points + diff)
+    this.setState({
+      points: output
     })
   }
 
@@ -83,10 +92,11 @@ export default class ProductRow extends Component {
     const blankCells = this.props.features.map((x) => {
       return (<Cell
         key={x.name}
-        productRow={this.props.productRow}
+        featureWeight={x.weight}
+        onPointsUpdate={this.handlePointsUpdate}
         />)
     })
-    blankCells.push(<td key={'last-one'} />)
+    blankCells.push(<td key={'last-one'}>{this.state.points}</td>)
 
     return (
       <tr className='product-row'>

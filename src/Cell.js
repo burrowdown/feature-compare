@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 
 const CELL_LOOKUP = {
   'blank': {display: 'cell-display-blank', next: 'green'},
@@ -19,6 +19,17 @@ export default class Cell extends Component {
   handleCellClick () {
     let newDisplay = CELL_LOOKUP[this.state.display].next
     this.setState({display: newDisplay})
+    let points
+    let weight = this.props.featureWeight
+    if (newDisplay === 'green') {
+      points = weight
+    } else if (newDisplay === 'red') {
+      points = -1 * weight
+    } else {
+      points = 0
+    }
+    this.props.onPointsUpdate(points)
+    console.log(weight)
   }
 
   cellDisplay () {
@@ -32,6 +43,7 @@ export default class Cell extends Component {
   }
 }
 
-// Cell.propTypes = {
-//   productRow: PropTypes.object
-// }
+Cell.propTypes = {
+  onPointsUpdate: PropTypes.func,
+  featureWeight: PropTypes.number
+}

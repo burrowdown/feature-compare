@@ -16,17 +16,28 @@ describe('integration test', () => {
   })
   describe('when adding a product', () => {
     beforeEach(() => {
-      app.find('#product-button').simulate('click')
+      app.setState({ products: [], features: [] })
     })
     it('saves input to products', () => {
+      app.find('#product-button').simulate('click')
       app.find('#new-product-input').simulate('change', {target: {value: 'foo'}})
       app.find('#save-button').simulate('click')
       expect(app.state('products').pop().name).toBe('foo')
     })
     it('will not save new products if input is empty', () => {
+      app.find('#product-button').simulate('click')
       app.find('#new-product-input').simulate('change', {target: {value: ''}})
       app.find('#save-button').simulate('click')
       expect(app.state('products').length).toBe(0)
+    })
+    it('saves url and price to products', () => {
+      app.setState({products: [{'name': 'foo', 'url': 'bar', 'price': 'baz'}]})
+      app.find('#edit-button').simulate('click')
+      app.find('#link-input').simulate('change', {target: {value: '123'}})
+      app.find('#price-input').simulate('change', {target: {value: '456'}})
+      app.find('#save-button').simulate('click')
+      expect(app.state('products')[0].url).toBe('123')
+      expect(app.state('products')[0].price).toBe('456')
     })
   })
 

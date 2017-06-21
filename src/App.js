@@ -10,10 +10,12 @@ class App extends Component {
     this.state = {
       // features: [{'name': 'waterproof', 'weight': 1}],
       features: [],
-      // products: [{'name': 'stuff', 'url': 'example.com', 'price': '$50', 'score': 0}, {'name': 'thing', 'url': ''}]
+      // TODO: check for score
+      // products: [{'name': 'stuff', 'url': 'example.com', 'price': '$50'}, {'name': 'thing', 'url': ''}]
       products: []
     }
     this.handleNewProductSave = this.handleNewProductSave.bind(this)
+    this.handleProductEditSave = this.handleProductEditSave.bind(this)
     this.handleNewFeatureSave = this.handleNewFeatureSave.bind(this)
     this.handleWeightSave = this.handleWeightSave.bind(this)
   }
@@ -21,8 +23,22 @@ class App extends Component {
   handleNewProductSave (name) {
     let newProducts = this.state.products.map((x) => Object.assign({}, x))
     if (name !== '') {
-      newProducts.push({'name': name, 'url': '', 'price': '', score: 0})
+      newProducts.push({'name': name, 'url': '', 'price': ''})
     }
+    this.setState({
+      products: newProducts
+    })
+  }
+
+  handleProductEditSave (name, price, link) {
+    let newProducts = this.state.products.map((product) => {
+      const newProduct = Object.assign({}, product)
+      if (newProduct.name === name) {
+        newProduct.price = price
+        newProduct.url = link
+      }
+      return newProduct
+    })
     this.setState({
       products: newProducts
     })
@@ -65,6 +81,7 @@ class App extends Component {
             products={this.state.products}
             features={this.state.features}
             onNewProductSave={this.handleNewProductSave}
+            onProductEditSave={this.handleProductEditSave}
           />
         </Table>
       </div>

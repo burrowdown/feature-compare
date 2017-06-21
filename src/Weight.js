@@ -14,7 +14,7 @@ export default class Weight extends Component {
 
   handleWeightEdit (e) {
     const name = this.props.featureInstance.name
-    const weight = e.target.value
+    const weight = Number(e.target.value)
     this.props.onWeightSave(name, weight)
   }
 

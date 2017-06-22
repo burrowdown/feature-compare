@@ -70,7 +70,7 @@ export default class FeatureRow extends Component {
 
   render () {
     const cols = this.props.features.map((feature) => {
-      return (<td  className='strong' key={feature.name}>{feature.name}</td>)
+      return (<td className='strong' key={feature.name}>{feature.name}</td>)
     })
 
     const weights = this.props.features.map((feature) => {

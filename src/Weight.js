@@ -25,7 +25,6 @@ export default class Weight extends Component {
   }
 
   hanldeWeightBlur () {
-    // TODO: integer validation
     if (this.props.featureInstance.weight < 1) {
       this.props.onWeightSave(this.props.featureInstance.name, 1)
     }
@@ -38,6 +37,7 @@ export default class Weight extends Component {
     let weightBox = this.props.featureInstance.weight
     if (this.state.weightInput) {
       weightBox = <input
+        type="number"
         className='weight-input'
         onChange={this.handleWeightEdit}
         value={this.props.featureInstance.weight}
@@ -48,7 +48,10 @@ export default class Weight extends Component {
         id={this.props.featureInstance.name}
         onClick={this.handleWeightClick}
         onBlur={this.hanldeWeightBlur}
-      >{weightBox}</td>
+      >
+      {weightBox}
+      <span className='weak'> points</span>
+      </td>
     )
   }
 }

@@ -1,13 +1,27 @@
-.table {
-    width: 300px;
+body {
+  font-size: 150%
 }
 
-body {
-    padding: 3em;
+.App {
+  margin: 4em;
+}
+
+.banner {
+  margin-left: 3em;
+}
+
+.table {
+    width: 100px;
+    margin-left: 3em;
 }
 
 .weak {
     color: darkgray;
+    white-space: nowrap;
+}
+
+.strong {
+  font-weight: 900;
 }
 
 .weight-input {

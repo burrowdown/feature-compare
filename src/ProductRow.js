@@ -100,7 +100,7 @@ export default class ProductRow extends Component {
     return (
       <tr className='product-row'>
         <td id='edit-save'>{editSave}</td>
-        <td id='product-name'>{this.props.productRow.name}</td>
+        <td id='product-name' className='strong'>{this.props.productRow.name}</td>
         <td id='product-link'>{link}</td>
         <td id='product-price'>{price}</td>
         {blankCells}

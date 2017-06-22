@@ -10,7 +10,6 @@ class App extends Component {
     this.state = {
       // features: [{'name': 'waterproof', 'weight': 1}],
       features: [],
-      // TODO: check for score
       // products: [{'name': 'stuff', 'url': 'example.com', 'price': '$50'}, {'name': 'thing', 'url': ''}]
       products: []
     }
@@ -70,7 +69,7 @@ class App extends Component {
   render () {
     return (
       <div className='App'>
-        <Jumbotron><h2>FeatureCompare.com</h2></Jumbotron>
+        <Jumbotron><h2 className='banner'>FeatureCompare.com</h2></Jumbotron>
         <Table bordered condensed hover>
           <FeatureRow
             features={this.state.features}

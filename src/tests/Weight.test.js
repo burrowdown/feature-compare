@@ -13,7 +13,7 @@ describe('Weight', () => {
   })
   it('loads the weight from the featureInstance', () => {
     expect(cell.exists()).toBe(true)
-    expect(cell.text()).toBe('123')
+    expect(cell.text()).toBe('123 points')
   })
   describe('when editing a weight', () => {
     it('updates the weightInput state on click', () => {

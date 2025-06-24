@@ -1,33 +1,76 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import Table from './components/Table'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const sampleFeatures = [
+    {
+      name: 'Feature 1',
+      description: 'Description 1',
+      weight: 1,
+    },
+    {
+      name: 'Feature 2',
+      description: 'Description 2',
+      weight: 2,
+    },
+  ]
+
+  const sampleProducts = [
+    {
+      name: 'Product 1',
+      description: 'Description 1',
+      url: 'https://www.google.com',
+      price: 100,
+    },
+    {
+      name: 'Product 2',
+      description: 'Description 2',
+      url: 'https://www.google.com',
+      price: 200,
+    },
+  ]
+
+const [features, setFeatures] = useState(sampleFeatures)
+const [products, setProducts] = useState(sampleProducts)
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <header>
+      <h1>
+        <span>
+          <img src="" alt="" />
+        </span>
+        Feature Compare
+      </h1>
+    </header>
+    <main>
+      <section>
+        <h2>
+          Features
+        </h2>
+        <Table />
+        {features.map((feature) => {
+          return (
+            <div key={feature.name}>
+              <h3>{feature.name}</h3>
+              <p>{feature.description}</p>
+              <p>{feature.weight}</p>
+            </div>
+          )
+        })}
+        {products.map((product) => {
+          return (
+            <div key={product.name}>
+              <h3>{product.name}</h3>
+              <p>{product.description}</p>
+              <p>{product.url}</p>
+              <p>{product.price}</p>
+            </div>
+          )
+        })}
+      </section>
+    </main>
     </>
   )
 }
